@@ -42,4 +42,55 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 	]); ?>
 
+    <h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getPayments(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Rentals', ['rental/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getRentals(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Address', ['address/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getAddress(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Store', ['store/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getStore(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Stores', ['store/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getStores(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?>
 </div>

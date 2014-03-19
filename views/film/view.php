@@ -44,4 +44,75 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 	]); ?>
 
+    <h3><?= \yii\helpers\Html::a('Language', ['language/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getLanguage(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('OriginalLanguage', ['language/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getOriginalLanguage(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('FilmActor', ['filmActor/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getFilmActor(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Actors', ['actor/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getActors(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('FilmCategory', ['filmCategory/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getFilmCategory(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Categories', ['category/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getCategories(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Inventories', ['inventory/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getInventories(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?>
 </div>

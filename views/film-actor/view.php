@@ -34,4 +34,25 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 	]); ?>
 
+    <h3><?= \yii\helpers\Html::a('Actor', ['actor/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getActor(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Film', ['film/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getFilm(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?>
 </div>

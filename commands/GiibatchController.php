@@ -5,6 +5,7 @@ namespace schmunk42\sakila\commands;
 use schmunk42\giiant\crud\providers\DateTimeProvider;
 use schmunk42\giiant\crud\providers\EditorProvider;
 use schmunk42\giiant\crud\providers\RangeProvider;
+use schmunk42\giiant\crud\providers\RelationProvider;
 use schmunk42\giiant\crud\providers\SelectProvider;
 use yii\console\Controller;
 use yii\helpers\Inflector;
@@ -64,7 +65,8 @@ class GiibatchController extends Controller
             EditorProvider::className(),
             SelectProvider::className(),
             DateTimeProvider::className(),
-            RangeProvider::className()
+            RangeProvider::className(),
+            RelationProvider::className()
         ];
 
         foreach ($tables AS $table) {

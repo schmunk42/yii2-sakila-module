@@ -41,8 +41,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\Payment 1		schmunk42\sakila\models\Customer 		schmunk42\sakila\models\Inventory 		schmunk42\sakila\models\Staff             Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><h3><?= \yii\helpers\Html::a('Customer', ['customer/index']) ?></h3><h3><?= \yii\helpers\Html::a('Inventory', ['inventory/index']) ?></h3><h3><?= \yii\helpers\Html::a('Staff', ['staff/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

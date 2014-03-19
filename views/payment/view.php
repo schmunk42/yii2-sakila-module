@@ -38,4 +38,35 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 	]); ?>
 
+    <h3><?= \yii\helpers\Html::a('Customer', ['customer/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getCustomer(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Rental', ['rental/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getRental(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?><h3><?= \yii\helpers\Html::a('Staff', ['staff/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getStaff(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?>
 </div>

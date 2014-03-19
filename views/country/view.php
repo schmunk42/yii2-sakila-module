@@ -34,4 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 	]); ?>
 
+    <h3><?= \yii\helpers\Html::a('Cities', ['city/index']) ?></h3><?php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => $model->getCities(),
+    'pagination' => [
+        'pageSize' => 5,
+    ],
+]);
+?>
+<?php if($provider->count != 0): ?>
+    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
+<?php endif; ?>
 </div>

@@ -35,8 +35,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\Category 		schmunk42\sakila\models\Film             Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Category', ['category/index']) ?></h3><h3><?= \yii\helpers\Html::a('Film', ['film/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

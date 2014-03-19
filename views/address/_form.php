@@ -43,8 +43,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\City 		schmunk42\sakila\models\Customer 1		schmunk42\sakila\models\Staff 1		schmunk42\sakila\models\Store 1            Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('City', ['city/index']) ?></h3><h3><?= \yii\helpers\Html::a('Customers', ['customer/index']) ?></h3><h3><?= \yii\helpers\Html::a('Staff', ['staff/index']) ?></h3><h3><?= \yii\helpers\Html::a('Stores', ['store/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

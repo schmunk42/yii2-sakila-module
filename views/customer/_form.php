@@ -45,8 +45,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\Address 		schmunk42\sakila\models\Store 		schmunk42\sakila\models\Payment 1		schmunk42\sakila\models\Rental 1            Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Address', ['address/index']) ?></h3><h3><?= \yii\helpers\Html::a('Store', ['store/index']) ?></h3><h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><h3><?= \yii\helpers\Html::a('Rentals', ['rental/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

@@ -62,8 +62,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\Language 		schmunk42\sakila\models\Language 		schmunk42\sakila\models\FilmActor 		schmunk42\sakila\models\Actor 1		schmunk42\sakila\models\FilmCategory 		schmunk42\sakila\models\Category 1		schmunk42\sakila\models\Inventory 1            Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Language', ['language/index']) ?></h3><h3><?= \yii\helpers\Html::a('OriginalLanguage', ['language/index']) ?></h3><h3><?= \yii\helpers\Html::a('FilmActor', ['filmActor/index']) ?></h3><h3><?= \yii\helpers\Html::a('Actors', ['actor/index']) ?></h3><h3><?= \yii\helpers\Html::a('FilmCategory', ['filmCategory/index']) ?></h3><h3><?= \yii\helpers\Html::a('Categories', ['category/index']) ?></h3><h3><?= \yii\helpers\Html::a('Inventories', ['inventory/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

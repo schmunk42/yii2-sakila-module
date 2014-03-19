@@ -35,8 +35,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\Address 1		schmunk42\sakila\models\Country             Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Addresses', ['address/index']) ?></h3><h3><?= \yii\helpers\Html::a('Country', ['country/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">

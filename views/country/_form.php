@@ -33,8 +33,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            		schmunk42\sakila\models\City 1            Relations (tbd)
-        </div>
+            <h3><?= \yii\helpers\Html::a('Cities', ['city/index']) ?></h3>        </div>
     </div>
 
     <div class="form-group">
