@@ -21,9 +21,7 @@ namespace schmunk42\sakila\models;
  *
  * @property Language $language
  * @property Language $originalLanguage
- * @property FilmActor $filmActor
  * @property Actor[] $actors
- * @property FilmCategory $filmCategory
  * @property Category[] $categories
  * @property Inventory[] $inventories
  */
@@ -93,25 +91,9 @@ class Film extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFilmActor()
-    {
-        return $this->hasOne(FilmActor::className(), ['film_id' => 'film_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getActors()
     {
         return $this->hasMany(Actor::className(), ['actor_id' => 'actor_id'])->viaTable('film_actor', ['film_id' => 'film_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFilmCategory()
-    {
-        return $this->hasOne(FilmCategory::className(), ['film_id' => 'film_id']);
     }
 
     /**

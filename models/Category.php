@@ -9,7 +9,6 @@ namespace schmunk42\sakila\models;
  * @property string $name
  * @property string $last_update
  *
- * @property FilmCategory $filmCategory
  * @property Film[] $films
  */
 class Category extends \yii\db\ActiveRecord
@@ -44,14 +43,6 @@ class Category extends \yii\db\ActiveRecord
             'name' => 'Name',
             'last_update' => 'Last Update',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFilmCategory()
-    {
-        return $this->hasOne(FilmCategory::className(), ['category_id' => 'category_id']);
     }
 
     /**

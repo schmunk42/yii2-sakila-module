@@ -19,14 +19,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create Rental', ['create'], ['class' => 'btn btn-success']) ?>
-
-                    		    <?= Html::a('Go To Payment', ['payment/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Customer', ['customer/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Inventory', ['inventory/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Staff', ['staff/index'], ['class' => 'btn btn-primary']) ?>
-        	</p>
+	<div class="clearfix">
+        <p class="pull-left">
+            <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+        <p class="pull-right">
+                                            <?= Html::a('Payment', ['payment/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Customer', ['customer/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Inventory', ['inventory/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Staff', ['staff/index'], ['class' => 'btn btn-primary']) ?>
+                    </p>
+    </div>
 
 	<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,

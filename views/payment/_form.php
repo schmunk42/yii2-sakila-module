@@ -13,17 +13,41 @@ use yii\widgets\ActiveForm;
 <div class="payment-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
-        'btn btn-success' : 'btn btn-primary']) ?>
+
+        <?php if (!$model->isNewRecord) { ?>
+        <?= Html::a('View', ['view', 'id'=>\Yii::$app->request->getQueryParam('id')], ['class' => 'btn btn-default']) ?>
+        <?php } else {?>
+        <?= Html::a('Manage', ['index'], ['class' => 'btn btn-inverted']) ?>
+        <?php } ?>
     </div>
 
-    <div class="row">
-        <div class="col-md-7">
-            		<?= $form->field($model, 'customer_id')->textInput() ?>
+    <?php $this->beginBlock('main'); ?>    		<?= '<label>customer_id</label>'.\dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'customer_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
-		<?= $form->field($model, 'staff_id')->textInput() ?>
+		<?= '<label>staff_id</label>'.\dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'staff_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
 		<?= \dosamigos\selectize\Selectize::widget([
     'model' => $model,
@@ -48,15 +72,35 @@ use yii\widgets\ActiveForm;
     ],
 ]) ?>
 
-		<?= $form->field($model, 'rental_id')->textInput() ?>
+		<?= '<label>rental_id</label>'.\dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'rental_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
-        </div>
-        <div class="col-md-3">
-            <h3><?= \yii\helpers\Html::a('Customer', ['customer/index']) ?></h3><h3><?= \yii\helpers\Html::a('Rental', ['rental/index']) ?></h3><h3><?= \yii\helpers\Html::a('Staff', ['staff/index']) ?></h3>        </div>
-    </div>
-
+    <?php $this->endBlock(); ?>
+    
+    
+    <?=
+    \yii\bootstrap\Tabs::widget(
+                 [
+                     'items' => [ [
+    'label'   => 'main',
+    'content' => $this->blocks['main'],
+    'active'  => true,
+], ]
+                 ]
+    );
+    ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ?
         'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

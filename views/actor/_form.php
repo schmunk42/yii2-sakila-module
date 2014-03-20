@@ -13,15 +13,17 @@ use yii\widgets\ActiveForm;
 <div class="actor-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
-        'btn btn-success' : 'btn btn-primary']) ?>
+
+        <?php if (!$model->isNewRecord) { ?>
+        <?= Html::a('View', ['view', 'id'=>\Yii::$app->request->getQueryParam('id')], ['class' => 'btn btn-default']) ?>
+        <?php } else {?>
+        <?= Html::a('Manage', ['index'], ['class' => 'btn btn-inverted']) ?>
+        <?php } ?>
     </div>
 
-    <div class="row">
-        <div class="col-md-7">
-            		<?= $form->field($model, 'first_name')->textInput(['maxlength' => 45]) ?>
+    <?php $this->beginBlock('main'); ?>    		<?= $form->field($model, 'first_name')->textInput(['maxlength' => 45]) ?>
 
 		<?= $form->field($model, 'last_name')->textInput(['maxlength' => 45]) ?>
 
@@ -33,13 +35,37 @@ use yii\widgets\ActiveForm;
     ],
 ]) ?>
 
-        </div>
-        <div class="col-md-3">
-            <h3><?= \yii\helpers\Html::a('FilmActor', ['filmActor/index']) ?></h3><h3><?= \yii\helpers\Html::a('Films', ['film/index']) ?></h3>        </div>
-    </div>
-
+    <?php $this->endBlock(); ?>
+    
+    <?php $this->beginBlock('Films'); ?><h3><?= \yii\helpers\Html::a('Films', ['film/index']) ?></h3><?php echo '<label>Relation</label>'.\dosamigos\selectize\Selectize::widget([
+    #'model' => $model->films,
+    'name' => 'film_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?><?php $this->endBlock(); ?>
+    <?=
+    \yii\bootstrap\Tabs::widget(
+                 [
+                     'items' => [ [
+    'label'   => 'main',
+    'content' => $this->blocks['main'],
+    'active'  => true,
+],[
+    'label'   => 'Films',
+    'content' => $this->blocks['Films'],
+    'active'  => false,
+], ]
+                 ]
+    );
+    ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ?
         'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

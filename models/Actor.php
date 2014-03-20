@@ -10,7 +10,6 @@ namespace schmunk42\sakila\models;
  * @property string $last_name
  * @property string $last_update
  *
- * @property FilmActor $filmActor
  * @property Film[] $films
  */
 class Actor extends \yii\db\ActiveRecord
@@ -46,14 +45,6 @@ class Actor extends \yii\db\ActiveRecord
             'last_name' => 'Last Name',
             'last_update' => 'Last Update',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFilmActor()
-    {
-        return $this->hasOne(FilmActor::className(), ['actor_id' => 'actor_id']);
     }
 
     /**

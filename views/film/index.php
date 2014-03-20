@@ -19,17 +19,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create Film', ['create'], ['class' => 'btn btn-success']) ?>
-
-                    		    <?= Html::a('Go To Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To FilmActor', ['film-actor/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Actor', ['actor/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To FilmCategory', ['film-category/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Category', ['category/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Inventory', ['inventory/index'], ['class' => 'btn btn-primary']) ?>
-        	</p>
+	<div class="clearfix">
+        <p class="pull-left">
+            <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+        <p class="pull-right">
+                                            <?= Html::a('Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Actor', ['actor/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Category', ['category/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Inventory', ['inventory/index'], ['class' => 'btn btn-primary']) ?>
+                    </p>
+    </div>
 
 	<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,

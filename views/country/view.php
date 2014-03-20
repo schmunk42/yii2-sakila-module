@@ -8,16 +8,16 @@ use yii\widgets\DetailView;
  * @var schmunk42\sakila\models\Country $model
  */
 
-$this->title = $model->country_id;
+$this->title = 'Country <small>View ' . $model->country_id . '</small>';
 $this->params['breadcrumbs'][] = ['label' => 'Countries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="country-view">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<p>
-		<?= Html::a('Update', ['update', 'id' => $model->country_id], ['class' => 'btn btn-primary']) ?>
+		<?= Html::a('Edit', ['update', 'id' => $model->country_id], ['class' => 'btn btn-primary']) ?>
 		<?php echo Html::a('Delete', ['delete', 'id' => $model->country_id], [
 			'class' => 'btn btn-danger',
 			'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		]); ?>
 	</p>
 
+    
+    <?php $this->beginBlock('schmunk42\sakila\models\Country'); ?>
+    <p class='pull-right'><?= \yii\helpers\Html::a('Country', ['country/index'], ['class'=>'btn btn-primary']) ?></p>
 	<?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
@@ -33,16 +36,42 @@ $this->params['breadcrumbs'][] = $this->title;
 			'last_update',
 		],
 	]); ?>
-
-    <h3><?= \yii\helpers\Html::a('Cities', ['city/index']) ?></h3><?php
+    <?php $this->endBlock(); ?>
+    <?php $this->beginBlock('Cities'); ?><?php \yii\widgets\Pjax::begin() ?><p class='pull-right'><?= \yii\helpers\Html::a('Cities', ['city/index'], ['class'=>'btn btn-primary']) ?></p><?php
 $provider = new \yii\data\ActiveDataProvider([
     'query' => $model->getCities(),
     'pagination' => [
-        'pageSize' => 5,
+        'pageSize' => 10,
     ],
 ]);
 ?>
 <?php if($provider->count != 0): ?>
-    <?= \yii\grid\GridView::widget(['dataProvider' => $provider,]); ?>
-<?php endif; ?>
-</div>
+    <?= \yii\grid\GridView::widget([
+            'dataProvider' => $provider,
+            'columns' => array (
+  0 => 'city_id',
+  1 => 'city',
+  2 => 'country_id',
+  3 => 
+  array (
+    'class' => 'yii\\grid\\ActionColumn',
+    'controller' => 'city',
+  ),
+)
+        ]); ?>
+<?php endif; ?><?php \yii\widgets\Pjax::end() ?><?php $this->endBlock() ?>
+    <?=
+    \yii\bootstrap\Tabs::widget(
+                 [
+                     'items' => [ [
+    'label'   => 'Country',
+    'content' => $this->blocks['schmunk42\sakila\models\Country'],
+    'active'  => true,
+],[
+    'label'   => 'Cities',
+    'content' => $this->blocks['Cities'],
+    'active'  => false,
+], ]
+                 ]
+    );
+    ?></div>

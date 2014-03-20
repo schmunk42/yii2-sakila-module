@@ -13,21 +13,45 @@ use yii\widgets\ActiveForm;
 <div class="customer-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
-        'btn btn-success' : 'btn btn-primary']) ?>
+
+        <?php if (!$model->isNewRecord) { ?>
+        <?= Html::a('View', ['view', 'id'=>\Yii::$app->request->getQueryParam('id')], ['class' => 'btn btn-default']) ?>
+        <?php } else {?>
+        <?= Html::a('Manage', ['index'], ['class' => 'btn btn-inverted']) ?>
+        <?php } ?>
     </div>
 
-    <div class="row">
-        <div class="col-md-7">
-            		<?= $form->field($model, 'store_id')->textInput() ?>
+    <?php $this->beginBlock('main'); ?>    		<?= '<label>store_id</label>'.\dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'store_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
 		<?= $form->field($model, 'first_name')->textInput(['maxlength' => 45]) ?>
 
 		<?= $form->field($model, 'last_name')->textInput(['maxlength' => 45]) ?>
 
-		<?= $form->field($model, 'address_id')->textInput() ?>
+		<?= '<label>address_id</label>'.\dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'address_id',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
 		<?= $form->field($model, 'create_date')->textInput() ?>
 
@@ -43,13 +67,30 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'email')->textInput(['maxlength' => 50]) ?>
 
-        </div>
-        <div class="col-md-3">
-            <h3><?= \yii\helpers\Html::a('Address', ['address/index']) ?></h3><h3><?= \yii\helpers\Html::a('Store', ['store/index']) ?></h3><h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><h3><?= \yii\helpers\Html::a('Rentals', ['rental/index']) ?></h3>        </div>
-    </div>
-
+    <?php $this->endBlock(); ?>
+    
+    <?php $this->beginBlock('Payments'); ?><h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><?php echo '' ?><?php $this->endBlock(); ?><?php $this->beginBlock('Rentals'); ?><h3><?= \yii\helpers\Html::a('Rentals', ['rental/index']) ?></h3><?php echo '' ?><?php $this->endBlock(); ?>
+    <?=
+    \yii\bootstrap\Tabs::widget(
+                 [
+                     'items' => [ [
+    'label'   => 'main',
+    'content' => $this->blocks['main'],
+    'active'  => true,
+],[
+    'label'   => 'Payments',
+    'content' => $this->blocks['Payments'],
+    'active'  => false,
+],[
+    'label'   => 'Rentals',
+    'content' => $this->blocks['Rentals'],
+    'active'  => false,
+], ]
+                 ]
+    );
+    ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ?
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ?
         'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

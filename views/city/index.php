@@ -19,12 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create City', ['create'], ['class' => 'btn btn-success']) ?>
-
-                    		    <?= Html::a('Go To Address', ['address/index'], ['class' => 'btn btn-primary']) ?>
-                    		    <?= Html::a('Go To Country', ['country/index'], ['class' => 'btn btn-primary']) ?>
-        	</p>
+	<div class="clearfix">
+        <p class="pull-left">
+            <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+        <p class="pull-right">
+                                            <?= Html::a('Address', ['address/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Country', ['country/index'], ['class' => 'btn btn-primary']) ?>
+                    </p>
+    </div>
 
 	<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,
