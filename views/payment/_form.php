@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="payment-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
     <div class="form-group">
 
         <?php if (!$model->isNewRecord) { ?>

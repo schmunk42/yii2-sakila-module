@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="film-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
     <div class="form-group">
 
         <?php if (!$model->isNewRecord) { ?>
@@ -53,7 +53,18 @@ use yii\widgets\ActiveForm;
         'preset' => 'basic'
     ]) ?>
 
-		<?= $form->field($model, 'rating')->textInput() ?>
+		<?= \dosamigos\selectize\Selectize::widget([
+    'model' => $model,
+    'attribute' => 'rating',
+    'clientOptions' => [
+        'delimiter' => ',',
+        'plugins' => ['remove_button'],
+        'persist' => false,
+        'create' => new \yii\web\JsExpression('function(input){
+            return {value: input, text: input};
+        }'),
+    ]
+]) ?>
 
 		<?= $form->field($model, 'special_features')->textInput(['maxlength' => 0]) ?>
 

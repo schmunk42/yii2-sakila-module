@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
         <p class="pull-right">
+                                            <?= Html::a('FilmActor', ['film-actor/index'], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Film', ['film/index'], ['class' => 'btn btn-primary']) ?>
                     </p>
     </div>

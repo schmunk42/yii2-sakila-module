@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <p class="pull-right">
                                             <?= Html::a('Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Language', ['language/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('FilmActor', ['film-actor/index'], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Actor', ['actor/index'], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('FilmCategory', ['film-category/index'], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Category', ['category/index'], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Inventory', ['inventory/index'], ['class' => 'btn btn-primary']) ?>
                     </p>
