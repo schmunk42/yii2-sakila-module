@@ -48,12 +48,12 @@ class GiibatchController extends Controller
             'category',
             'city',
             'country',
-            #'film_actor',
+            'film_actor',
             'film',
             'customer',
             'staff',
             'store',
-            #'film_category',
+            'film_category',
             'language',
             'inventory',
             'payment',
@@ -77,7 +77,7 @@ class GiibatchController extends Controller
                 'tableName'  => $table,
                 'modelClass' => Inflector::camelize($table),
             ];
-            $route  = 'gii/model';
+            $route  = 'gii/giiant-model';
             \Yii::$app->runAction(ltrim($route, '/'), $params);
         }
 
@@ -91,7 +91,7 @@ class GiibatchController extends Controller
                 'controllerClass'  => $baseNamespace . 'controllers\\' . Inflector::camelize($table) . 'Controller',
                 'providerList'     => implode(',', $providers)
             ];
-            $route  = 'gii/giiant';
+            $route  = 'gii/giiant-crud';
             \Yii::$app->runAction(ltrim($route, '/'), $params);
         }
     }
