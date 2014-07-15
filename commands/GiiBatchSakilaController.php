@@ -2,6 +2,7 @@
 
 namespace schmunk42\sakila\commands;
 
+use schmunk42\giiant\crud\providers\CallbackProvider;
 use schmunk42\giiant\crud\providers\DateTimeProvider;
 use schmunk42\giiant\crud\providers\EditorProvider;
 use schmunk42\giiant\crud\providers\RangeProvider;
@@ -13,7 +14,7 @@ use yii\helpers\Inflector;
 /**
  * @author Tobias Munk <schmunk@usrbin.de>
  */
-class GiibatchController extends Controller
+class GiiBatchSakilaController extends Controller
 {
 
     public $generate = false;
@@ -62,6 +63,7 @@ class GiibatchController extends Controller
 
         // works nice with IDE autocompleteion
         $providers = [
+            CallbackProvider::className(),
             EditorProvider::className(),
             SelectProvider::className(),
             DateTimeProvider::className(),
@@ -77,7 +79,7 @@ class GiibatchController extends Controller
                 'tableName'  => $table,
                 'modelClass' => Inflector::camelize($table),
             ];
-            $route  = 'gii/giiant-model';
+            $route  = 'giic/giiant-model';
             \Yii::$app->runAction(ltrim($route, '/'), $params);
         }
 
@@ -85,13 +87,14 @@ class GiibatchController extends Controller
             $params = [
                 'generate'         => $this->generate,
                 'template'         => 'default',
-                'moduleID'         => 'console-sakila',
+                'moduleID'         => 'sakila',
                 'modelClass'       => $baseNamespace . 'models\\' . Inflector::camelize($table),
                 'searchModelClass' => $baseNamespace . 'models\\' . Inflector::camelize($table) . 'Search',
                 'controllerClass'  => $baseNamespace . 'controllers\\' . Inflector::camelize($table) . 'Controller',
-                'providerList'     => implode(',', $providers)
+                'providerList'     => implode(',', $providers),
+                #'pathPrefix'       => 'sakila/',
             ];
-            $route  = 'gii/giiant-crud';
+            $route  = 'giic/giiant-crud';
             \Yii::$app->runAction(ltrim($route, '/'), $params);
         }
     }
