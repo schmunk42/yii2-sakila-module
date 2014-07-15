@@ -7,14 +7,16 @@ use yii\helpers\Html;
  * @var schmunk42\sakila\models\Customer $model
  */
 
-$this->title = 'Customer <small>Update ' . $model->customer_id . '</small>';
+$this->title = 'Customer Update ' . $model->customer_id . '';
 $this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->customer_id, 'url' => ['view', 'id' => $model->customer_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="customer-update">
 
-	<h1><?= $this->title ?></h1>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->customer_id], ['class' => 'btn btn-info']) ?>
+    </p>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

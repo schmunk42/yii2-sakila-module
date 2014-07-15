@@ -37,7 +37,7 @@ class AddressBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'district', 'city_id', 'phone', 'last_update'], 'required'],
+            [['address', 'district', 'city_id', 'phone'], 'required'],
             [['city_id'], 'integer'],
             [['last_update'], 'safe'],
             [['address', 'address2'], 'string', 'max' => 50],

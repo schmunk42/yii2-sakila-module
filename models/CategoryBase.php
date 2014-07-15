@@ -11,7 +11,7 @@ use Yii;
  * @property string $name
  * @property string $last_update
  *
- * @property FilmCategory $filmCategory
+ * @property FilmCategory[] $filmCategories
  * @property Film[] $films
  */
 class CategoryBase extends \yii\db\ActiveRecord
@@ -30,7 +30,7 @@ class CategoryBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'last_update'], 'required'],
+            [['name'], 'required'],
             [['last_update'], 'safe'],
             [['name'], 'string', 'max' => 25]
         ];
@@ -51,9 +51,9 @@ class CategoryBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFilmCategory()
+    public function getFilmCategories()
     {
-        return $this->hasOne(FilmCategory::className(), ['category_id' => 'category_id']);
+        return $this->hasMany(FilmCategory::className(), ['category_id' => 'category_id']);
     }
 
     /**

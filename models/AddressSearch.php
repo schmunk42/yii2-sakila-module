@@ -56,14 +56,18 @@ class AddressSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'address_id');
-		$this->addCondition($query, 'address', true);
-		$this->addCondition($query, 'address2', true);
-		$this->addCondition($query, 'district', true);
-		$this->addCondition($query, 'city_id');
-		$this->addCondition($query, 'postal_code', true);
-		$this->addCondition($query, 'phone', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'address_id' => $this->address_id,
+            'city_id' => $this->city_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'address2', $this->address2])
+            ->andFilterWhere(['like', 'district', $this->district])
+            ->andFilterWhere(['like', 'postal_code', $this->postal_code])
+            ->andFilterWhere(['like', 'phone', $this->phone]);
+
 		return $dataProvider;
 	}
 

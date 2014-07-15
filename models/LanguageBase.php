@@ -29,7 +29,7 @@ class LanguageBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'last_update'], 'required'],
+            [['name'], 'required'],
             [['last_update'], 'safe'],
             [['name'], 'string', 'max' => 20]
         ];

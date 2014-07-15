@@ -48,10 +48,14 @@ class ActorSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'actor_id');
-		$this->addCondition($query, 'first_name', true);
-		$this->addCondition($query, 'last_name', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'actor_id' => $this->actor_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'first_name', $this->first_name])
+            ->andFilterWhere(['like', 'last_name', $this->last_name]);
+
 		return $dataProvider;
 	}
 

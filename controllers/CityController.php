@@ -6,7 +6,9 @@ use schmunk42\sakila\models\City;
 use schmunk42\sakila\models\CitySearch;
 use yii\web\Controller;
 use yii\web\HttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * CityController implements the CRUD actions for City model.
@@ -22,6 +24,22 @@ class CityController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'access' => [
+                'class' => AccessControl::className(),
+                    'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'create',
+                            'update',
+                            'delete',
+                            'view'
+                        ],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ]
 		];
 	}
 
@@ -34,6 +52,7 @@ class CityController extends Controller
 		$searchModel = new CitySearch;
 		$dataProvider = $searchModel->search($_GET);
 
+        Url::remember();
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
@@ -47,7 +66,8 @@ class CityController extends Controller
 	 */
 	public function actionView($id)
 	{
-		return $this->render('view', [
+        Url::remember();
+        return $this->render('view', [
 			'model' => $this->findModel($id),
 		]);
 	}
@@ -62,8 +82,9 @@ class CityController extends Controller
 		$model = new City;
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->city_id]);
+			return $this->redirect(Url::previous());
 		} else {
+            $model->load($_GET);
 			return $this->render('create', [
 				'model' => $model,
 			]);
@@ -81,7 +102,7 @@ class CityController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->city_id]);
+            return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -98,7 +119,7 @@ class CityController extends Controller
 	public function actionDelete($id)
 	{
 		$this->findModel($id)->delete();
-		return $this->redirect(['index']);
+		return $this->redirect(Url::previous());
 	}
 
 	/**
@@ -110,7 +131,7 @@ class CityController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = City::find($id)) !== null) {
+		if (($model = City::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

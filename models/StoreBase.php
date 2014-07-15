@@ -34,7 +34,7 @@ class StoreBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manager_staff_id', 'address_id', 'last_update'], 'required'],
+            [['manager_staff_id', 'address_id'], 'required'],
             [['manager_staff_id', 'address_id'], 'integer'],
             [['last_update'], 'safe'],
             [['manager_staff_id'], 'unique']

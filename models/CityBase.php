@@ -31,7 +31,7 @@ class CityBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['city', 'country_id', 'last_update'], 'required'],
+            [['city', 'country_id'], 'required'],
             [['country_id'], 'integer'],
             [['last_update'], 'safe'],
             [['city'], 'string', 'max' => 50]

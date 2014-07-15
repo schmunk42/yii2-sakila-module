@@ -30,7 +30,7 @@ class FilmActorBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['actor_id', 'film_id', 'last_update'], 'required'],
+            [['actor_id', 'film_id'], 'required'],
             [['actor_id', 'film_id'], 'integer'],
             [['last_update'], 'safe']
         ];

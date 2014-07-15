@@ -48,10 +48,13 @@ class StoreSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'store_id');
-		$this->addCondition($query, 'manager_staff_id');
-		$this->addCondition($query, 'address_id');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'store_id' => $this->store_id,
+            'manager_staff_id' => $this->manager_staff_id,
+            'address_id' => $this->address_id,
+            'last_update' => $this->last_update,
+        ]);
+
 		return $dataProvider;
 	}
 

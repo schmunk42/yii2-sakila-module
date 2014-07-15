@@ -67,19 +67,23 @@ class FilmSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'film_id');
-		$this->addCondition($query, 'title', true);
-		$this->addCondition($query, 'description', true);
-		$this->addCondition($query, 'release_year');
-		$this->addCondition($query, 'language_id');
-		$this->addCondition($query, 'original_language_id');
-		$this->addCondition($query, 'rental_duration');
-		$this->addCondition($query, 'rental_rate');
-		$this->addCondition($query, 'length');
-		$this->addCondition($query, 'replacement_cost');
-		$this->addCondition($query, 'rating', true);
-		$this->addCondition($query, 'special_features', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'film_id' => $this->film_id,
+            'release_year' => $this->release_year,
+            'language_id' => $this->language_id,
+            'original_language_id' => $this->original_language_id,
+            'rental_duration' => $this->rental_duration,
+            'rental_rate' => $this->rental_rate,
+            'length' => $this->length,
+            'replacement_cost' => $this->replacement_cost,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'rating', $this->rating])
+            ->andFilterWhere(['like', 'special_features', $this->special_features]);
+
 		return $dataProvider;
 	}
 

@@ -46,9 +46,13 @@ class LanguageSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'language_id');
-		$this->addCondition($query, 'name', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'language_id' => $this->language_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'name', $this->name]);
+
 		return $dataProvider;
 	}
 

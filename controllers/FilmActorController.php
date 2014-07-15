@@ -6,7 +6,9 @@ use schmunk42\sakila\models\FilmActor;
 use schmunk42\sakila\models\FilmActorSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * FilmActorController implements the CRUD actions for FilmActor model.
@@ -22,6 +24,22 @@ class FilmActorController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'access' => [
+                'class' => AccessControl::className(),
+                    'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'create',
+                            'update',
+                            'delete',
+                            'view'
+                        ],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ]
 		];
 	}
 
@@ -34,6 +52,7 @@ class FilmActorController extends Controller
 		$searchModel = new FilmActorSearch;
 		$dataProvider = $searchModel->search($_GET);
 
+        Url::remember();
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
@@ -48,7 +67,8 @@ class FilmActorController extends Controller
 	 */
 	public function actionView($actor_id, $film_id)
 	{
-		return $this->render('view', [
+        Url::remember();
+        return $this->render('view', [
 			'model' => $this->findModel($actor_id, $film_id),
 		]);
 	}
@@ -63,8 +83,9 @@ class FilmActorController extends Controller
 		$model = new FilmActor;
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'actor_id' => $model->actor_id, 'film_id' => $model->film_id]);
+			return $this->redirect(Url::previous());
 		} else {
+            $model->load($_GET);
 			return $this->render('create', [
 				'model' => $model,
 			]);
@@ -83,7 +104,7 @@ class FilmActorController extends Controller
 		$model = $this->findModel($actor_id, $film_id);
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'actor_id' => $model->actor_id, 'film_id' => $model->film_id]);
+            return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -101,7 +122,7 @@ class FilmActorController extends Controller
 	public function actionDelete($actor_id, $film_id)
 	{
 		$this->findModel($actor_id, $film_id)->delete();
-		return $this->redirect(['index']);
+		return $this->redirect(Url::previous());
 	}
 
 	/**
@@ -114,7 +135,7 @@ class FilmActorController extends Controller
 	 */
 	protected function findModel($actor_id, $film_id)
 	{
-		if (($model = FilmActor::find(['actor_id' => $actor_id, 'film_id' => $film_id])) !== null) {
+		if (($model = FilmActor::findOne(['actor_id' => $actor_id, 'film_id' => $film_id])) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

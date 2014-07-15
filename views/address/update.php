@@ -7,14 +7,16 @@ use yii\helpers\Html;
  * @var schmunk42\sakila\models\Address $model
  */
 
-$this->title = 'Address <small>Update ' . $model->address_id . '</small>';
+$this->title = 'Address Update ' . $model->address_id . '';
 $this->params['breadcrumbs'][] = ['label' => 'Addresses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->address_id, 'url' => ['view', 'id' => $model->address_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="address-update">
 
-	<h1><?= $this->title ?></h1>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->address_id], ['class' => 'btn btn-info']) ?>
+    </p>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

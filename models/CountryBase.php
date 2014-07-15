@@ -29,7 +29,7 @@ class CountryBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['country', 'last_update'], 'required'],
+            [['country'], 'required'],
             [['last_update'], 'safe'],
             [['country'], 'string', 'max' => 50]
         ];

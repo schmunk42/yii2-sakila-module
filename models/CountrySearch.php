@@ -46,9 +46,13 @@ class CountrySearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'country_id');
-		$this->addCondition($query, 'country', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'country_id' => $this->country_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'country', $this->country]);
+
 		return $dataProvider;
 	}
 

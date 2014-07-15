@@ -55,13 +55,16 @@ class PaymentSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'payment_id');
-		$this->addCondition($query, 'customer_id');
-		$this->addCondition($query, 'staff_id');
-		$this->addCondition($query, 'rental_id');
-		$this->addCondition($query, 'amount');
-		$this->addCondition($query, 'payment_date');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'payment_id' => $this->payment_id,
+            'customer_id' => $this->customer_id,
+            'staff_id' => $this->staff_id,
+            'rental_id' => $this->rental_id,
+            'amount' => $this->amount,
+            'payment_date' => $this->payment_date,
+            'last_update' => $this->last_update,
+        ]);
+
 		return $dataProvider;
 	}
 

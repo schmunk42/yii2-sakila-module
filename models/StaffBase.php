@@ -11,7 +11,7 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  * @property integer $address_id
- * @property string $picture
+ * @property resource $picture
  * @property string $email
  * @property integer $store_id
  * @property integer $active
@@ -41,7 +41,7 @@ class StaffBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'address_id', 'store_id', 'username', 'last_update'], 'required'],
+            [['first_name', 'last_name', 'address_id', 'store_id', 'username'], 'required'],
             [['address_id', 'store_id', 'active'], 'integer'],
             [['picture'], 'string'],
             [['last_update'], 'safe'],

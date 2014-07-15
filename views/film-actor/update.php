@@ -7,14 +7,16 @@ use yii\helpers\Html;
  * @var schmunk42\sakila\models\FilmActor $model
  */
 
-$this->title = 'Film Actor <small>Update ' . $model->actor_id . '</small>';
+$this->title = 'Film Actor Update ' . $model->actor_id . '';
 $this->params['breadcrumbs'][] = ['label' => 'Film Actors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->actor_id, 'url' => ['view', 'actor_id' => $model->actor_id, 'film_id' => $model->film_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="film-actor-update">
 
-	<h1><?= $this->title ?></h1>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'actor_id' => $model->actor_id, 'film_id' => $model->film_id], ['class' => 'btn btn-info']) ?>
+    </p>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

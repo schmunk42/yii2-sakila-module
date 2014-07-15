@@ -3,20 +3,23 @@
 use yii\helpers\Html;
 
 /**
- * @var yii\web\View $this
- * @var schmunk42\sakila\models\Staff $model
- */
+* @var yii\web\View $this
+* @var schmunk42\sakila\models\Staff $model
+*/
 
-$this->title = 'Create Staff';
+$this->title = 'Create';
 $this->params['breadcrumbs'][] = ['label' => 'Staff', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="staff-create">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+    <p class="pull-left">
+        <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
+    </p>
+    <div class="clearfix"></div>
 
-	<?php echo $this->render('_form', [
-		'model' => $model,
-	]); ?>
+    <?php echo $this->render('_form', [
+    'model' => $model,
+    ]); ?>
 
 </div>

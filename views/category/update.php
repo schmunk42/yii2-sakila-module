@@ -7,14 +7,16 @@ use yii\helpers\Html;
  * @var schmunk42\sakila\models\Category $model
  */
 
-$this->title = 'Category <small>Update ' . $model->name . '</small>';
+$this->title = 'Category Update ' . $model->name . '';
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->category_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="category-update">
 
-	<h1><?= $this->title ?></h1>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->category_id], ['class' => 'btn btn-info']) ?>
+    </p>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

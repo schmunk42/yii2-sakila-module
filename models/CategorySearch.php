@@ -46,9 +46,13 @@ class CategorySearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'category_id');
-		$this->addCondition($query, 'name', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'category_id' => $this->category_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'name', $this->name]);
+
 		return $dataProvider;
 	}
 

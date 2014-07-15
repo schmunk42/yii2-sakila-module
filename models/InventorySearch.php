@@ -48,10 +48,13 @@ class InventorySearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'inventory_id');
-		$this->addCondition($query, 'film_id');
-		$this->addCondition($query, 'store_id');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'inventory_id' => $this->inventory_id,
+            'film_id' => $this->film_id,
+            'store_id' => $this->store_id,
+            'last_update' => $this->last_update,
+        ]);
+
 		return $dataProvider;
 	}
 

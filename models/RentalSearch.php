@@ -54,13 +54,16 @@ class RentalSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'rental_id');
-		$this->addCondition($query, 'rental_date');
-		$this->addCondition($query, 'inventory_id');
-		$this->addCondition($query, 'customer_id');
-		$this->addCondition($query, 'return_date');
-		$this->addCondition($query, 'staff_id');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'rental_id' => $this->rental_id,
+            'rental_date' => $this->rental_date,
+            'inventory_id' => $this->inventory_id,
+            'customer_id' => $this->customer_id,
+            'return_date' => $this->return_date,
+            'staff_id' => $this->staff_id,
+            'last_update' => $this->last_update,
+        ]);
+
 		return $dataProvider;
 	}
 

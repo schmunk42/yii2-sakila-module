@@ -36,7 +36,7 @@ class RentalBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rental_date', 'inventory_id', 'customer_id', 'staff_id', 'last_update'], 'required'],
+            [['rental_date', 'inventory_id', 'customer_id', 'staff_id'], 'required'],
             [['rental_date', 'return_date', 'last_update'], 'safe'],
             [['inventory_id', 'customer_id', 'staff_id'], 'integer'],
             [['rental_date', 'inventory_id', 'customer_id'], 'unique', 'targetAttribute' => ['rental_date', 'inventory_id', 'customer_id'], 'message' => 'The combination of Rental Date, Inventory ID and Customer ID has already been taken.']

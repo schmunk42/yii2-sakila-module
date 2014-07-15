@@ -6,7 +6,9 @@ use schmunk42\sakila\models\FilmCategory;
 use schmunk42\sakila\models\FilmCategorySearch;
 use yii\web\Controller;
 use yii\web\HttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * FilmCategoryController implements the CRUD actions for FilmCategory model.
@@ -22,6 +24,22 @@ class FilmCategoryController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'access' => [
+                'class' => AccessControl::className(),
+                    'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'create',
+                            'update',
+                            'delete',
+                            'view'
+                        ],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ]
 		];
 	}
 
@@ -34,6 +52,7 @@ class FilmCategoryController extends Controller
 		$searchModel = new FilmCategorySearch;
 		$dataProvider = $searchModel->search($_GET);
 
+        Url::remember();
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
@@ -48,7 +67,8 @@ class FilmCategoryController extends Controller
 	 */
 	public function actionView($film_id, $category_id)
 	{
-		return $this->render('view', [
+        Url::remember();
+        return $this->render('view', [
 			'model' => $this->findModel($film_id, $category_id),
 		]);
 	}
@@ -63,8 +83,9 @@ class FilmCategoryController extends Controller
 		$model = new FilmCategory;
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'film_id' => $model->film_id, 'category_id' => $model->category_id]);
+			return $this->redirect(Url::previous());
 		} else {
+            $model->load($_GET);
 			return $this->render('create', [
 				'model' => $model,
 			]);
@@ -83,7 +104,7 @@ class FilmCategoryController extends Controller
 		$model = $this->findModel($film_id, $category_id);
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'film_id' => $model->film_id, 'category_id' => $model->category_id]);
+            return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -101,7 +122,7 @@ class FilmCategoryController extends Controller
 	public function actionDelete($film_id, $category_id)
 	{
 		$this->findModel($film_id, $category_id)->delete();
-		return $this->redirect(['index']);
+		return $this->redirect(Url::previous());
 	}
 
 	/**
@@ -114,7 +135,7 @@ class FilmCategoryController extends Controller
 	 */
 	protected function findModel($film_id, $category_id)
 	{
-		if (($model = FilmCategory::find(['film_id' => $film_id, 'category_id' => $category_id])) !== null) {
+		if (($model = FilmCategory::findOne(['film_id' => $film_id, 'category_id' => $category_id])) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

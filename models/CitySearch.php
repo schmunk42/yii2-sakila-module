@@ -48,10 +48,14 @@ class CitySearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'city_id');
-		$this->addCondition($query, 'city', true);
-		$this->addCondition($query, 'country_id');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'city_id' => $this->city_id,
+            'country_id' => $this->country_id,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'city', $this->city]);
+
 		return $dataProvider;
 	}
 

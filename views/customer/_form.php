@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /**
 * @var yii\web\View $this
@@ -12,88 +12,47 @@ use yii\widgets\ActiveForm;
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
 
-    <div class="form-group">
-
-        <?php if (!$model->isNewRecord) { ?>
-        <?= Html::a('View', ['view', 'id'=>\Yii::$app->request->getQueryParam('id')], ['class' => 'btn btn-default']) ?>
-        <?php } else {?>
-        <?= Html::a('Manage', ['index'], ['class' => 'btn btn-inverted']) ?>
-        <?php } ?>
-    </div>
-
-    <?php $this->beginBlock('main'); ?>    		<?= '<label>store_id</label>'.\dosamigos\selectize\Selectize::widget([
-    'model' => $model,
-    'attribute' => 'store_id',
-    'clientOptions' => [
-        'delimiter' => ',',
-        'plugins' => ['remove_button'],
-        'persist' => false,
-        'create' => new \yii\web\JsExpression('function(input){
-            return {value: input, text: input};
-        }'),
-    ]
-]) ?>
-
-		<?= $form->field($model, 'first_name')->textInput(['maxlength' => 45]) ?>
-
-		<?= $form->field($model, 'last_name')->textInput(['maxlength' => 45]) ?>
-
-		<?= '<label>address_id</label>'.\dosamigos\selectize\Selectize::widget([
-    'model' => $model,
-    'attribute' => 'address_id',
-    'clientOptions' => [
-        'delimiter' => ',',
-        'plugins' => ['remove_button'],
-        'persist' => false,
-        'create' => new \yii\web\JsExpression('function(input){
-            return {value: input, text: input};
-        }'),
-    ]
-]) ?>
-
-		<?= $form->field($model, 'create_date')->textInput() ?>
-
-		<?= $form->field($model, 'last_update')->widget(\zhuravljov\widgets\DateTimePicker::className(), [
-    'options' => ['class' => 'form-control'],
-    'clientOptions' => [
-        'autoclose' => true,
-        'todayHighlight' => true,
-    ],
-]) ?>
-
-		<?= $form->field($model, 'active')->textInput() ?>
-
-		<?= $form->field($model, 'email')->textInput(['maxlength' => 50]) ?>
-
-    <?php $this->endBlock(); ?>
-    
-    <?php $this->beginBlock('Payments'); ?><h3><?= \yii\helpers\Html::a('Payments', ['payment/index']) ?></h3><?php echo '' ?><?php $this->endBlock(); ?><?php $this->beginBlock('Rentals'); ?><h3><?= \yii\helpers\Html::a('Rentals', ['rental/index']) ?></h3><?php echo '' ?><?php $this->endBlock(); ?>
-    <?=
+    <div class="">
+        <?php $this->beginBlock('main'); ?>
+        <p>
+            
+			<?= $form->field($model, 'store_id')->dropDownList(
+    \yii\helpers\ArrayHelper::map(schmunk42\sakila\models\Store::find()->all(),'store_id','store_id'),
+    ['prompt'=>'Choose...']    // active field
+); ?>
+			<?= $form->field($model, 'first_name')->textInput(['maxlength' => 45]) ?>
+			<?= $form->field($model, 'last_name')->textInput(['maxlength' => 45]) ?>
+			<?= $form->field($model, 'address_id')->dropDownList(
+    \yii\helpers\ArrayHelper::map(schmunk42\sakila\models\Address::find()->all(),'address_id','address_id'),
+    ['prompt'=>'Choose...']    // active field
+); ?>
+			<?= $form->field($model, 'create_date')->textInput() ?>
+			<?= $form->field($model, 'active')->textInput() ?>
+			<?= $form->field($model, 'email')->textInput(['maxlength' => 50]) ?>
+        </p>
+        <?php $this->endBlock(); ?>
+        
+        <?=
     \yii\bootstrap\Tabs::widget(
                  [
+                   'encodeLabels' => false,
                      'items' => [ [
-    'label'   => 'main',
+    'label'   => 'Customer',
     'content' => $this->blocks['main'],
     'active'  => true,
-],[
-    'label'   => 'Payments',
-    'content' => $this->blocks['Payments'],
-    'active'  => false,
-],[
-    'label'   => 'Rentals',
-    'content' => $this->blocks['Rentals'],
-    'active'  => false,
 ], ]
                  ]
     );
     ?>
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ?
-        'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+        <hr/>
 
-    <?php ActiveForm::end(); ?>
+        <?= Html::submitButton('<span class="glyphicon glyphicon-check"></span> '.($model->isNewRecord ? 'Create' : 'Save'), ['class' => $model->isNewRecord ?
+        'btn btn-primary' : 'btn btn-primary']) ?>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
 
 </div>

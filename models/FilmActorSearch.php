@@ -46,9 +46,12 @@ class FilmActorSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'actor_id');
-		$this->addCondition($query, 'film_id');
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'actor_id' => $this->actor_id,
+            'film_id' => $this->film_id,
+            'last_update' => $this->last_update,
+        ]);
+
 		return $dataProvider;
 	}
 

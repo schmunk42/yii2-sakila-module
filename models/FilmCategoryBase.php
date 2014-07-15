@@ -30,7 +30,7 @@ class FilmCategoryBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['film_id', 'category_id', 'last_update'], 'required'],
+            [['film_id', 'category_id'], 'required'],
             [['film_id', 'category_id'], 'integer'],
             [['last_update'], 'safe']
         ];

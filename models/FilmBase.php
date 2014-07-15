@@ -23,9 +23,9 @@ use Yii;
  *
  * @property Language $language
  * @property Language $originalLanguage
- * @property FilmActor $filmActor
+ * @property FilmActor[] $filmActors
  * @property Actor[] $actors
- * @property FilmCategory $filmCategory
+ * @property FilmCategory[] $filmCategories
  * @property Category[] $categories
  * @property Inventory[] $inventories
  */
@@ -45,7 +45,7 @@ class FilmBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'language_id', 'last_update'], 'required'],
+            [['title', 'language_id'], 'required'],
             [['description', 'rating', 'special_features'], 'string'],
             [['release_year', 'last_update'], 'safe'],
             [['language_id', 'original_language_id', 'rental_duration', 'length'], 'integer'],
@@ -95,9 +95,9 @@ class FilmBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFilmActor()
+    public function getFilmActors()
     {
-        return $this->hasOne(FilmActor::className(), ['film_id' => 'film_id']);
+        return $this->hasMany(FilmActor::className(), ['film_id' => 'film_id']);
     }
 
     /**
@@ -111,9 +111,9 @@ class FilmBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFilmCategory()
+    public function getFilmCategories()
     {
-        return $this->hasOne(FilmCategory::className(), ['film_id' => 'film_id']);
+        return $this->hasMany(FilmCategory::className(), ['film_id' => 'film_id']);
     }
 
     /**

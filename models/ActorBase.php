@@ -12,7 +12,7 @@ use Yii;
  * @property string $last_name
  * @property string $last_update
  *
- * @property FilmActor $filmActor
+ * @property FilmActor[] $filmActors
  * @property Film[] $films
  */
 class ActorBase extends \yii\db\ActiveRecord
@@ -31,7 +31,7 @@ class ActorBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'last_update'], 'required'],
+            [['first_name', 'last_name'], 'required'],
             [['last_update'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 45]
         ];
@@ -53,9 +53,9 @@ class ActorBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFilmActor()
+    public function getFilmActors()
     {
-        return $this->hasOne(FilmActor::className(), ['actor_id' => 'actor_id']);
+        return $this->hasMany(FilmActor::className(), ['actor_id' => 'actor_id']);
     }
 
     /**

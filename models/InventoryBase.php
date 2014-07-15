@@ -32,7 +32,7 @@ class InventoryBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['film_id', 'store_id', 'last_update'], 'required'],
+            [['film_id', 'store_id'], 'required'],
             [['film_id', 'store_id'], 'integer'],
             [['last_update'], 'safe']
         ];

@@ -35,7 +35,7 @@ class PaymentBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'staff_id', 'amount', 'payment_date', 'last_update'], 'required'],
+            [['customer_id', 'staff_id', 'amount', 'payment_date'], 'required'],
             [['customer_id', 'staff_id', 'rental_id'], 'integer'],
             [['amount'], 'number'],
             [['payment_date', 'last_update'], 'safe']

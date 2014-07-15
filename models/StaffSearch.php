@@ -62,17 +62,21 @@ class StaffSearch extends Model
 			return $dataProvider;
 		}
 
-		$this->addCondition($query, 'staff_id');
-		$this->addCondition($query, 'first_name', true);
-		$this->addCondition($query, 'last_name', true);
-		$this->addCondition($query, 'address_id');
-		$this->addCondition($query, 'picture', true);
-		$this->addCondition($query, 'email', true);
-		$this->addCondition($query, 'store_id');
-		$this->addCondition($query, 'active');
-		$this->addCondition($query, 'username', true);
-		$this->addCondition($query, 'password', true);
-		$this->addCondition($query, 'last_update');
+		$query->andFilterWhere([
+            'staff_id' => $this->staff_id,
+            'address_id' => $this->address_id,
+            'store_id' => $this->store_id,
+            'active' => $this->active,
+            'last_update' => $this->last_update,
+        ]);
+
+		$query->andFilterWhere(['like', 'first_name', $this->first_name])
+            ->andFilterWhere(['like', 'last_name', $this->last_name])
+            ->andFilterWhere(['like', 'picture', $this->picture])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'password', $this->password]);
+
 		return $dataProvider;
 	}
 
