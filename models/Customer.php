@@ -9,4 +9,7 @@ use Yii;
  */
 class Customer extends CustomerBase
 {
+    public function getLabel(){
+        return $this->first_name.' '.$this->last_name;
+    }
 }

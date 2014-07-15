@@ -9,4 +9,7 @@ use Yii;
  */
 class Actor extends ActorBase
 {
+    function getLabel(){
+        return $this->first_name.' '.$this->last_name;
+    }
 }

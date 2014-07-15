@@ -9,4 +9,7 @@ use Yii;
  */
 class Inventory extends InventoryBase
 {
+    public function getLabel(){
+        return ($this->film) ? $this->film->title." @".$this->store_id : '#'.$this->film_id;
+    }
 }
